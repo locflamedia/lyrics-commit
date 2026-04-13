@@ -1,12 +1,14 @@
-const lyrics = require('../lyrics.json');
+import lyrics from '../lyrics.json';
 
-module.exports = (req, res) => {
+export const config = { runtime: 'edge' };
+
+export default function handler(req) {
   const line = lyrics[Math.floor(Math.random() * lyrics.length)];
 
-  const accept = req.headers.accept || '';
+  const accept = req.headers.get('accept') || '';
   if (accept.includes('text/html')) {
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send(`<!DOCTYPE html>
+    return new Response(
+      `<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="utf-8">
@@ -28,11 +30,14 @@ a:hover{color:#888}
 <blockquote>"${line.lyric}"</blockquote>
 <div class="song">— ${line.song} · ${line.artist}</div>
 <button class="reload" onclick="location.reload()">random khác</button>
-<div class="hint"><a href="/api/random">plain text api</a> · <a href="https://github.com/pyyupsk/lyrics-commit">github</a></div>
+<div class="hint"><a href="/api/random">plain text api</a> · <a href="https://github.com/locflamedia/lyrics-commit">github</a></div>
 </body>
-</html>`);
-  } else {
-    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-    res.send(line.lyric);
+</html>`,
+      { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+    );
   }
-};
+
+  return new Response(line.lyric, {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  });
+}

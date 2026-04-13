@@ -1,7 +1,10 @@
-const lyrics = require('../lyrics.json');
+import lyrics from '../lyrics.json';
 
-module.exports = (req, res) => {
+export const config = { runtime: 'edge' };
+
+export default function handler() {
   const line = lyrics[Math.floor(Math.random() * lyrics.length)];
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  res.send(line.lyric);
-};
+  return new Response(line.lyric, {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  });
+}
