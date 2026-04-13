@@ -13,6 +13,7 @@ export default function handler(req) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="https://beru.io.vn/favicon.ico">
 <title>lyrics commit</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -30,7 +31,7 @@ a:hover{color:#888}
 <blockquote>"${line.lyric}"</blockquote>
 <div class="song">— ${line.song} · ${line.artist}</div>
 <button class="reload" onclick="location.reload()">random khác</button>
-<div class="hint"><a href="/api/random">plain text api</a> · <a href="https://github.com/locflamedia/lyrics-commit">github</a></div>
+<div class="hint"><a href="/api/random">plain text api</a> · <a href="https://github.com/locflamedia/lyrics-commit">github</a> · by <a href="https://beru.io.vn">Beru</a></div>
 </body>
 </html>`,
       { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
