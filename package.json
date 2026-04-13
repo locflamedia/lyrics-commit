@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "dependencies": {
+  "scripts": {
+    "build": "node build.js",
+    "scrape": "node scraper.js"
+  },
+  "devDependencies": {
     "axios": "^1.15.0",
     "cheerio": "^1.2.0"
   }
